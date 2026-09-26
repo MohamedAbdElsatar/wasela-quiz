@@ -196,46 +196,68 @@
                 <i class="fa-solid fa-award text-4xl"></i>
             </div>
             <h2 class="text-2xl sm:text-3xl font-black text-wasela-dark mb-1">النتيجة النهائية!</h2>
-            <p class="text-gray-600 text-sm mb-6">شكراً لمشاركتك في تحدي وسيلة ستور</p>
+            <p class="text-gray-600 text-sm mb-6">خد سكرين شوت للنتيجة وشاركها في تعليقات البوست! 📸✨</p>
 
-            <!-- Score Circle -->
-            <div class="w-36 h-36 mx-auto bg-gradient-to-br from-wasela-teal to-wasela-cyan rounded-full flex flex-col items-center justify-center text-white shadow-xl mb-6 border-4 border-white">
-                <span id="final-score" class="text-5xl font-black leading-none">0</span>
-                <span class="text-xs font-semibold opacity-90 mt-1">من 10 أسئلة</span>
-            </div>
+            <!-- Shareable Screenshot Card -->
+            <div id="screenshot-card" class="bg-gradient-to-b from-white to-wasela-light p-6 rounded-2xl border-2 border-wasela-cyan shadow-md mb-6 text-center relative overflow-hidden">
+                <div class="flex items-center justify-center gap-2 mb-3">
+                    <svg width="32" height="32" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" class="h-7 w-auto">
+                        <path d="M15 25L38 75L50 48L62 75L85 25" stroke="#38C5EC" stroke-width="14" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M42 62C50 76 66 76 74 62" stroke="#FF5A26" stroke-width="12" stroke-linecap="round"/>
+                    </svg>
+                    <span class="font-black text-wasela-teal text-lg">وسيلة ستور - Wasela Store</span>
+                </div>
 
-            <!-- Title & Badge -->
-            <div class="bg-wasela-light p-4 rounded-2xl mb-8 border border-wasela-cyan/30">
-                <p class="text-sm text-gray-500 mb-1">لقبك في البيت بعد الاختبار:</p>
-                <h3 id="result-title" class="text-xl sm:text-2xl font-black text-wasela-teal">
+                <!-- Score Circle -->
+                <div class="w-28 h-28 mx-auto bg-gradient-to-br from-wasela-teal to-wasela-cyan rounded-full flex flex-col items-center justify-center text-white shadow-lg mb-4 border-4 border-white">
+                    <span id="final-score" class="text-4xl font-black leading-none">0</span>
+                    <span class="text-[10px] font-semibold opacity-90 mt-1">من 10 أسئلة</span>
+                </div>
+
+                <!-- Title & Badge -->
+                <p class="text-xs text-gray-500 mb-1">لقبك في التحدي:</p>
+                <h3 id="result-title" class="text-xl font-black text-wasela-teal mb-2">
                     الملك الشاطر!
                 </h3>
-                <p id="result-desc" class="text-gray-700 text-sm mt-2 font-medium">
+                <p id="result-desc" class="text-gray-700 text-xs sm:text-sm font-medium leading-relaxed max-w-sm mx-auto">
                     ماشاء الله عليك! حافظ وفاهم أجهزة بيتك حتة حتة.
                 </p>
             </div>
 
-            <!-- Questions Summary Accordion -->
-            <div class="text-right mb-8">
-                <h4 class="font-bold text-wasela-dark mb-3 flex items-center gap-2">
-                    <i class="fa-solid fa-list-check text-wasela-cyan"></i>
-                    <span>مراجعة إجابات الأسئلة:</span>
-                </h4>
-                <div id="questions-summary" class="space-y-3 max-h-60 overflow-y-auto pr-2">
-                    <!-- Summary items dynamically generated -->
-                </div>
+            <!-- Copy Status Message -->
+            <div id="copy-toast" class="hidden mb-4 p-2.5 bg-wasela-teal text-white rounded-xl text-xs font-bold transition-all">
+                ✓ تم نسخ النتيجة! افتح التعليقات والصقها فوراً.
             </div>
 
             <!-- Action Buttons -->
-            <div class="flex flex-col sm:flex-row gap-3 justify-center">
-                <button onclick="startGame()" class="px-6 py-3.5 bg-gray-200 hover:bg-gray-300 text-wasela-dark font-bold rounded-xl transition flex items-center justify-center gap-2">
-                    <i class="fa-solid fa-rotate-right"></i>
-                    <span>إعادة اللعبة</span>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 justify-center mb-6">
+                <button onclick="copyScoreToClipboard()" class="px-5 py-3.5 bg-wasela-cyan hover:bg-cyan-500 text-white font-bold rounded-xl shadow-md transition flex items-center justify-center gap-2 text-sm">
+                    <i class="fa-solid fa-copy"></i>
+                    <span>نسخ النتيجة للتعليق 📋</span>
                 </button>
-                <a href="https://www.facebook.com/people/Wasela-Store-%D9%88%D8%B3%D9%8A%D9%84%D8%A9-%D8%B3%D8%AA%D9%88%D8%B1/61586266196080/" target="_blank" rel="noopener noreferrer" class="px-8 py-3.5 bg-wasela-orange hover:bg-orange-600 text-white font-bold rounded-xl shadow-button transition flex items-center justify-center gap-2">
-                    <i class="fa-brands fa-facebook-f"></i>
-                    <span>زر صفحتنا على فيسبوك</span>
+
+                <a id="fb-comment-link" href="https://www.facebook.com/people/Wasela-Store-%D9%88%D8%B3%D9%8A%D9%8لا-%D8%B3%D8%AA%D9%88%D8%B1/61586266196080/" target="_blank" rel="noopener noreferrer" class="px-5 py-3.5 bg-wasela-orange hover:bg-orange-600 text-white font-bold rounded-xl shadow-button transition flex items-center justify-center gap-2 text-sm">
+                    <i class="fa-brands fa-facebook"></i>
+                    <span>ضع السكرين شوت في التعليقات 💬</span>
                 </a>
+            </div>
+
+            <div class="flex justify-center mb-6">
+                <button onclick="startGame()" class="px-6 py-2.5 bg-gray-200 hover:bg-gray-300 text-wasela-dark font-bold text-xs rounded-xl transition flex items-center justify-center gap-2">
+                    <i class="fa-solid fa-rotate-right"></i>
+                    <span>إعادة اللعبة بأسئلة جديدة</span>
+                </button>
+            </div>
+
+            <!-- Questions Summary Accordion -->
+            <div class="text-right border-t border-gray-200 pt-6">
+                <h4 class="font-bold text-wasela-dark mb-3 flex items-center gap-2 text-sm sm:text-base">
+                    <i class="fa-solid fa-list-check text-wasela-cyan"></i>
+                    <span>مراجعة إجابات الأسئلة:</span>
+                </h4>
+                <div id="questions-summary" class="space-y-3 max-h-52 overflow-y-auto pr-2">
+                    <!-- Summary items dynamically generated -->
+                </div>
             </div>
         </div>
 
@@ -764,6 +786,26 @@
                 `;
                 summaryContainer.appendChild(item);
             });
+        }
+
+        // Copy Score to Clipboard for Facebook Comments
+        function copyScoreToClipboard() {
+            playSound('click');
+            const title = document.getElementById('result-title').textContent.trim();
+            const textToCopy = `حصلت على ${score}/10 في تحدي وسيلة ستور للأجهزة المنزلية! 🏠✨\nاللقب: ${title}\nجرب التحدي وورّينا شطارتك في الكومنتات! 👇`;
+
+            const dummy = document.createElement("textarea");
+            document.body.appendChild(dummy);
+            dummy.value = textToCopy;
+            dummy.select();
+            document.execCommand("copy");
+            document.body.removeChild(dummy);
+
+            const toast = document.getElementById('copy-toast');
+            toast.classList.remove('hidden');
+            setTimeout(() => {
+                toast.classList.add('hidden');
+            }, 3000);
         }
     </script>
 </body>
